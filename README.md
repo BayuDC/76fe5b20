@@ -1,1 +1,1 @@
-# tink-web
+# Tink
