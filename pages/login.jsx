@@ -1,11 +1,13 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import useAuth from '../hooks/use-auth';
 import useAxios from '../hooks/use-axios';
 
 export default function LoginPage() {
     const axios = useAxios();
     const router = useRouter();
+    const auth = useAuth();
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
@@ -20,11 +22,10 @@ export default function LoginPage() {
                 password: e.target.password.value,
             })
             .then(res => {
-                // TODO load data
+                auth.load();
                 router.push('/');
             })
             .catch(err => {
-                console.log(err);
                 setError(err.response?.data.message || 'Something went wrong');
             })
             .finally(() => setLoading(false));

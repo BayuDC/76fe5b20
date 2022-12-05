@@ -1,10 +1,13 @@
+import Guard from '../components/guard';
 import Layout from '../components/layout';
 
 function HomePage() {
     return (
-        <Layout>
-            <></>
-        </Layout>
+        <Guard>
+            <Layout>
+                <></>
+            </Layout>
+        </Guard>
     );
 }
 
