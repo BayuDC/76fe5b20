@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import useAuth from '../hooks/use-auth';
 
 export default function Navbar() {
@@ -6,7 +7,9 @@ export default function Navbar() {
     return (
         <div className="navbar bg-base-100 rounded-box shadow-xl">
             <div className="flex-1">
-                <a className="btn btn-ghost normal-case text-xl no-animation">Tink</a>
+                <Link href="/" className="btn btn-ghost normal-case text-xl hover:bg-inherit px-3">
+                    Tink!
+                </Link>
             </div>
             <div className="flex-none">
                 <div className="dropdown dropdown-end">
