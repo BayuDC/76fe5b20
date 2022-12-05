@@ -52,7 +52,7 @@ export default function LoginPage() {
                                 </label>
                                 <input type="password" className="input input-bordered" name="password" required />
                                 <label className="label">
-                                    <Link href="/forgot-password" className="label-text-alt link link-hover">
+                                    <Link href="/password/forgot" className="label-text-alt link link-hover">
                                         Forgot password?
                                     </Link>
                                 </label>
