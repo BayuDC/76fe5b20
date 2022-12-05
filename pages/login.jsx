@@ -23,7 +23,10 @@ export default function LoginPage() {
                 // TODO load data
                 router.push('/');
             })
-            .catch(err => setError(err.response?.data.message || 'Something went wrong'))
+            .catch(err => {
+                console.log(err);
+                setError(err.response?.data.message || 'Something went wrong');
+            })
             .finally(() => setLoading(false));
     };
 

@@ -1,4 +1,8 @@
+import useAuth from '../hooks/use-auth';
+
 export default function Navbar() {
+    const auth = useAuth();
+
     return (
         <div className="navbar bg-base-100 rounded-box shadow-xl">
             <div className="flex-1">
@@ -8,7 +12,7 @@ export default function Navbar() {
                 <div className="dropdown dropdown-end">
                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar flex">
                         <div className="w-10 rounded-full bg-slate-400 text-white text-2xl font-light leading-10">
-                            B
+                            {(auth.user && auth.user.fullname[0]) || auth.user.username[0]}
                         </div>
                     </label>
                     <ul
