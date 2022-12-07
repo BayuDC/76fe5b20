@@ -4,7 +4,7 @@ import { useState } from 'react';
 import useAuth from '../hooks/use-auth';
 import useAxios from '../hooks/use-axios';
 
-export default function LoginPage() {
+function LoginPage() {
     const axios = useAxios();
     const router = useRouter();
     const auth = useAuth();
@@ -32,64 +32,65 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="container max-w-6xl">
-            <div className="hero min-h-screen">
-                <div className="hero-content flex-col w-full max-w-sm">
-                    <div className="text-center lg:text-left">
-                        <h1 className="text-6xl font-bold">Tink!</h1>
-                    </div>
-                    <div className="card w-full flex-shrink-0 shadow-2xl bg-base-100">
-                        <form onSubmit={handleSubmit} className="card-body">
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Username</span>
-                                </label>
-                                <input type="text" className="input input-bordered" name="username" required />
-                            </div>
-                            <div className="form-control mb-4">
-                                <label className="label">
-                                    <span className="label-text">Password</span>
-                                </label>
-                                <input type="password" className="input input-bordered" name="password" required />
-                                <label className="label">
-                                    <Link href="/password/forgot" className="label-text-alt link link-hover">
-                                        Forgot password?
-                                    </Link>
-                                </label>
-                            </div>
-                            {error && (
-                                <div className="alert alert-error shadow-lg mb-2">
-                                    <div>
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            className="stroke-current flex-shrink-0 h-6 w-6"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth="2"
-                                                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-                                            />
-                                        </svg>
-                                        <span>{error}</span>
-                                    </div>
+        <div className="hero min-h-screen">
+            <div className="hero-content flex-col w-full max-w-sm">
+                <div className="text-center lg:text-left">
+                    <h1 className="text-6xl font-bold">Tink!</h1>
+                </div>
+                <div className="card w-full flex-shrink-0 shadow-2xl bg-base-100">
+                    <form onSubmit={handleSubmit} className="card-body">
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Username</span>
+                            </label>
+                            <input type="text" className="input input-bordered" name="username" required />
+                        </div>
+                        <div className="form-control mb-4">
+                            <label className="label">
+                                <span className="label-text">Password</span>
+                            </label>
+                            <input type="password" className="input input-bordered" name="password" required />
+                            <label className="label">
+                                <Link href="/password/forgot" className="label-text-alt link link-hover">
+                                    Forgot password?
+                                </Link>
+                            </label>
+                        </div>
+                        {error && (
+                            <div className="alert alert-error shadow-lg mb-2">
+                                <div>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="stroke-current flex-shrink-0 h-6 w-6"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                                        />
+                                    </svg>
+                                    <span>{error}</span>
                                 </div>
-                            )}
-                            <div className="form-control">
-                                {loading ? (
-                                    <button className="btn btn-primary loading"></button>
-                                ) : (
-                                    <button className="btn btn-primary" type="submit">
-                                        Login
-                                    </button>
-                                )}
                             </div>
-                        </form>
-                    </div>
+                        )}
+                        <div className="form-control">
+                            {loading ? (
+                                <button className="btn btn-primary loading"></button>
+                            ) : (
+                                <button className="btn btn-primary" type="submit">
+                                    Login
+                                </button>
+                            )}
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     );
 }
+
+LoginPage.title = 'Login';
+export default LoginPage;

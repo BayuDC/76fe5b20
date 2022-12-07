@@ -1,10 +1,9 @@
-import Link from 'next/link';
 import Guard from '../../components/guard';
 
 export default function UpdatePasswordPage() {
     return (
         <Guard>
-            <div className="hero min-h-screen bg-base-200">
+            <div className="hero min-h-screen">
                 <div className="hero-content flex-col lg:flex-row-reverse w-full max-w-sm">
                     <div className="text-center lg:text-left w-full max-w-80">
                         <h1 className="text-5xl font-bold">Please Update Your Password</h1>
