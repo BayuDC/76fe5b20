@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { createContext, useState, useEffect } from 'react';
 import useAxios from '../hooks/use-axios';
 
@@ -5,6 +6,7 @@ export const AuthContext = createContext({});
 
 export function AuthProvider({ children }) {
     const axios = useAxios();
+    const router = useRouter();
     const [user, setUser] = useState();
     const [loading, setLoading] = useState(true);
 
@@ -13,7 +15,12 @@ export function AuthProvider({ children }) {
         axios
             .get('/auth')
             .then(res => setUser(res.data))
-            .catch(() => setUser(undefined))
+            .catch(err => {
+                if (err.response?.status == 425) {
+                    setUser(err.response?.data);
+                    router.push('/password/update');
+                }
+            })
             .finally(() => setLoading(false));
     };
     const unload = () => {

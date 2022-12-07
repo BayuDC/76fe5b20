@@ -49,7 +49,7 @@ function LoginPage() {
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input type="password" className="input input-bordered" name="password" required />
+                            <input type="password" className="input input-bordered" name="password" />
                             <label className="label">
                                 <Link href="/password/forgot" className="label-text-alt link link-hover">
                                     Forgot password?
