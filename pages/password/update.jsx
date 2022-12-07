@@ -1,6 +1,24 @@
+import { useState } from 'react';
 import Guard from '../../components/guard';
+import useAxios from '../../hooks/use-axios';
 
 export default function UpdatePasswordPage() {
+    const axios = useAxios();
+    const [loading, setLoading] = useState(false);
+    const [password, setPassword] = useState('');
+    const [password2, setPassword2] = useState('');
+    const handleSubmit = e => {
+        setLoading(true);
+        e.preventDefault();
+
+        axios
+            .patch('/profile/password', { password, password_confirm: password2 })
+            .then(res => {
+                console.log(res.data.message);
+            })
+            .finally(() => setLoading(false));
+    };
+
     return (
         <Guard>
             <div className="hero min-h-screen">
@@ -9,23 +27,39 @@ export default function UpdatePasswordPage() {
                         <h1 className="text-5xl font-bold">Please Update Your Password</h1>
                     </div>
                     <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-                        <div className="card-body">
+                        <form onSubmit={handleSubmit} className="card-body">
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">New Password</span>
                                 </label>
-                                <input type="password" className="input input-bordered" />
+                                <input
+                                    value={password}
+                                    onInput={e => setPassword(e.target.value)}
+                                    type="password"
+                                    className="input input-bordered"
+                                />
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Repeat Password</span>
                                 </label>
-                                <input type="password" className="input input-bordered" />
+                                <input
+                                    value={password2}
+                                    onInput={e => setPassword2(e.target.value)}
+                                    type="password"
+                                    className="input input-bordered"
+                                />
                             </div>
                             <div className="form-control mt-6">
-                                <button className="btn btn-primary">Update</button>
+                                {loading ? (
+                                    <button className="btn btn-primary loading"></button>
+                                ) : (
+                                    <button className="btn btn-primary" type="submit">
+                                        Update
+                                    </button>
+                                )}
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
