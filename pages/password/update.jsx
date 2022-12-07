@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useState } from 'react';
 import Guard from '../../components/guard';
 import useAxios from '../../hooks/use-axios';
@@ -5,6 +6,7 @@ import useAxios from '../../hooks/use-axios';
 export default function UpdatePasswordPage() {
     const axios = useAxios();
     const [error, setError] = useState();
+    const [message, setMessage] = useState();
     const [loading, setLoading] = useState(false);
     const [password, setPassword] = useState('');
     const [password2, setPassword2] = useState('');
@@ -23,7 +25,7 @@ export default function UpdatePasswordPage() {
         axios
             .patch('/profile/password', { password, password_confirm: password2 })
             .then(res => {
-                console.log(res.data.message);
+                setMessage(res.data.message);
             })
             .catch(err => {
                 setError(err.response?.message || 'Something went wrong');
@@ -94,6 +96,16 @@ export default function UpdatePasswordPage() {
                                 )}
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+            <div className={'modal modal-bottom sm:modal-middle bg-base-300' + (message ? ' modal-open' : '')}>
+                <div className="modal-box">
+                    <h3 className="font-bold text-lg">{message}</h3>
+                    <div className="modal-action">
+                        <Link href="/login" className="btn">
+                            OK
+                        </Link>
                     </div>
                 </div>
             </div>
