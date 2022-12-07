@@ -17,7 +17,7 @@ export function AuthProvider({ children }) {
             .then(res => setUser(res.data))
             .catch(err => {
                 if (err.response?.status == 425) {
-                    setUser(err.response?.data);
+                    setUser({ limited: true });
                     router.push('/password/update');
                 }
             })

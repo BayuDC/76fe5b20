@@ -1,9 +1,11 @@
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import useAuth from '../../hooks/use-auth';
 import Guard from '../../components/guard';
 import useAxios from '../../hooks/use-axios';
 
 export default function UpdatePasswordPage() {
+    const auth = useAuth();
     const axios = useAxios();
     const [error, setError] = useState();
     const [message, setMessage] = useState();
@@ -12,7 +14,6 @@ export default function UpdatePasswordPage() {
     const [password2, setPassword2] = useState('');
     const handleSubmit = e => {
         setError();
-        setLoading(true);
         e.preventDefault();
 
         if (password.length < 6) {
@@ -21,11 +22,13 @@ export default function UpdatePasswordPage() {
         if (password != password2) {
             return setError('The password confirmation does not match');
         }
+        setLoading(true);
 
         axios
             .patch('/profile/password', { password, password_confirm: password2 })
             .then(res => {
                 setMessage(res.data.message);
+                auth.unload();
             })
             .catch(err => {
                 setError(err.response?.message || 'Something went wrong');
@@ -34,7 +37,7 @@ export default function UpdatePasswordPage() {
     };
 
     return (
-        <Guard>
+        <Guard custom={() => auth.user.limited}>
             <div className="hero min-h-screen">
                 <div className="hero-content flex-col lg:flex-row-reverse w-full max-w-sm">
                     <div className="text-center lg:text-left w-full max-w-80">

@@ -15,7 +15,7 @@ export default function Navbar() {
                 <div className="dropdown dropdown-end">
                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar flex">
                         <div className="w-10 rounded-full bg-primary text-white text-2xl font-bold leading-10">
-                            {auth.user && (auth.user.fullname?.charAt(0) || auth.user.username?.charAt(0))}
+                            {auth.user?.username && (auth.user.fullname[0] || auth.user.username[0])}
                         </div>
                     </label>
                     <ul

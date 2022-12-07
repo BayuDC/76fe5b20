@@ -5,11 +5,9 @@ import { AuthProvider } from '../contexts/auth';
 export default function MyApp({ Component, pageProps }) {
     return (
         <AuthProvider>
-            {Component.title && (
-                <Head>
-                    <title>Tink! - {Component.title}</title>
-                </Head>
-            )}
+            <Head>
+                <title>{Component.title ? `Tink! - ${Component.title}` : 'Tink!'}</title>
+            </Head>
             <Component {...pageProps} />
         </AuthProvider>
     );
