@@ -4,17 +4,29 @@ import useAxios from '../../hooks/use-axios';
 
 export default function UpdatePasswordPage() {
     const axios = useAxios();
+    const [error, setError] = useState();
     const [loading, setLoading] = useState(false);
     const [password, setPassword] = useState('');
     const [password2, setPassword2] = useState('');
     const handleSubmit = e => {
+        setError();
         setLoading(true);
         e.preventDefault();
+
+        if (password.length < 6) {
+            return setError('Minimal password length is 6 characters');
+        }
+        if (password != password2) {
+            return setError('The password confirmation does not match');
+        }
 
         axios
             .patch('/profile/password', { password, password_confirm: password2 })
             .then(res => {
                 console.log(res.data.message);
+            })
+            .catch(err => {
+                setError(err.response?.message || 'Something went wrong');
             })
             .finally(() => setLoading(false));
     };
@@ -37,9 +49,10 @@ export default function UpdatePasswordPage() {
                                     onInput={e => setPassword(e.target.value)}
                                     type="password"
                                     className="input input-bordered"
+                                    required
                                 />
                             </div>
-                            <div className="form-control">
+                            <div className="form-control mb-4">
                                 <label className="label">
                                     <span className="label-text">Repeat Password</span>
                                 </label>
@@ -48,9 +61,30 @@ export default function UpdatePasswordPage() {
                                     onInput={e => setPassword2(e.target.value)}
                                     type="password"
                                     className="input input-bordered"
+                                    required
                                 />
                             </div>
-                            <div className="form-control mt-6">
+                            {error && (
+                                <div className="alert alert-error shadow-lg mb-2">
+                                    <div>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            className="stroke-current flex-shrink-0 h-6 w-6"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth="2"
+                                                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                                            />
+                                        </svg>
+                                        <span>{error}</span>
+                                    </div>
+                                </div>
+                            )}
+                            <div className="form-control">
                                 {loading ? (
                                     <button className="btn btn-primary loading"></button>
                                 ) : (
