@@ -1,9 +1,8 @@
-<script lang="ts">
+<script lang="ts" setup>
 definePageMeta({
     layout: 'clear',
 });
 </script>
-
 <template>
     <div class="hero min-h-screen">
         <div class="hero-content text-center">

@@ -7,4 +7,6 @@ export default defineNuxtConfig({
             autoprefixer: {},
         },
     },
+
+    vite: {},
 });
