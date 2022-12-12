@@ -1,0 +1,25 @@
+<template>
+    <div class="navbar rounded-box p-0">
+        <div class="flex-1">
+            <NuxtLink to="/" class="link no-underline text-white text-4xl font-bold p-0">Tink!</NuxtLink>
+        </div>
+        <div class="flex-none">
+            <div class="dropdown dropdown-end">
+                <label tabindex="0" class="btn btn-ghost btn-circle avatar flex">
+                    <div class="w-10 rounded-full bg-primary text-white text-2xl font-bold leading-10">B</div>
+                </label>
+                <ul
+                    tabindex="0"
+                    class="menu menu-compact dropdown-content mt-2 p-2 shadow bg-base-100 rounded-box w-52"
+                >
+                    <li>
+                        <a>Profile</a>
+                    </li>
+                    <li>
+                        <NuxtLink to="/logout">Logout</NuxtLink>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</template>
