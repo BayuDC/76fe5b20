@@ -7,14 +7,19 @@ export default function useApi(
     opts?: UseFetchOptions<any> | undefined
 ): AsyncData<any, FetchError<any> | null> {
     const loading = useLoading();
+    const message = useMessage();
 
     return useFetch('/api' + path, {
         ...opts,
         onRequest() {
             loading.value = true;
+            message.value = undefined;
         },
         onResponse() {
             loading.value = false;
+        },
+        onResponseError({ response }) {
+            message.value = response._data?.message || 'Something went wrong';
         },
     });
 }

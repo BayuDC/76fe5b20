@@ -3,6 +3,8 @@ definePageMeta({
     layout: 'clear',
 });
 
+const loading = useLoading();
+
 interface LoginForm extends EventTarget {
     username: { value: string };
     password: { value: string };
@@ -18,8 +20,6 @@ async function handleSubmit(e: Event) {
 
     if (!error.value) {
         navigateTo('/', { replace: true });
-    } else {
-        console.log(error.value);
     }
 }
 </script>
@@ -49,7 +49,7 @@ async function handleSubmit(e: Event) {
                         </label>
                     </div>
                     <div class="form-control">
-                        <button class="btn btn-primary">Login</button>
+                        <button class="btn btn-primary" :class="{ loading }">Login</button>
                     </div>
                 </form>
             </div>
