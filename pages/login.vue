@@ -4,6 +4,7 @@ definePageMeta({
 });
 
 const loading = useLoading();
+const { refresh } = useAuthFetch();
 
 interface LoginForm extends EventTarget {
     username: { value: string };
@@ -19,6 +20,7 @@ async function handleSubmit(e: Event) {
     });
 
     if (!error.value) {
+        await refresh();
         navigateTo('/', { replace: true });
     }
 }

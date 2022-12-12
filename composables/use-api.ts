@@ -10,7 +10,6 @@ export default function useApi(
     const message = useMessage();
 
     return useFetch('/api' + path, {
-        ...opts,
         onRequest() {
             loading.value = true;
             message.value = undefined;
@@ -21,5 +20,6 @@ export default function useApi(
         onResponseError({ response }) {
             message.value = response._data?.message || 'Something went wrong';
         },
+        ...opts,
     });
 }
