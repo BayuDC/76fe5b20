@@ -4,4 +4,5 @@ watchEffect(async () => await refresh());
 </script>
 <template>
     <slot v-if="!loading" />
+    <!-- TODO Loading -->
 </template>
