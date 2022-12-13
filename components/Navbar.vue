@@ -11,7 +11,7 @@ const user = useAuthUser();
             <div v-if="user" class="dropdown dropdown-end">
                 <label tabindex="0" class="btn btn-ghost btn-circle avatar flex">
                     <div class="w-10 rounded-full bg-primary text-white text-2xl font-bold leading-10">
-                        {{ user.fullname.charAt(0) || user.username.charAt(0) }}
+                        {{ user.fullname?.charAt(0) || user.username?.charAt(0) }}
                     </div>
                 </label>
                 <ul

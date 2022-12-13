@@ -14,14 +14,17 @@ export default function useAuthFetch() {
     });
 
     return {
-        async refresh() {
+        async refresh(): Promise<boolean> {
             await refresh();
             user.value = data.value?.user;
 
             if (error.value?.status == 425) {
                 user.value = { limited: true };
                 navigateTo('/password/update');
+                return false;
             }
+
+            return true;
         },
         loading,
     };

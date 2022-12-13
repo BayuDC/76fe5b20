@@ -6,11 +6,18 @@ const props = defineProps({
         default: false,
         type: Boolean,
     },
+    custom: {
+        type: Function,
+    },
 });
 
 onMounted(() => {
     if (!user.value && !props.inverse) return navigateTo('/login');
     if (user.value && props.inverse) return navigateTo('/');
+    if (props.custom && !props.custom()) {
+        return showError({ statusCode: 403, message: 'Forbidden' });
+    }
+
     render.value = true;
 });
 </script>

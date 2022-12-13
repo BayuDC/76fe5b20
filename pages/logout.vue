@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-await useApi('/auth/logout', { method: 'post' });
+await useApi('/auth/logout', { method: 'POST' });
 useAuthUser().value = undefined;
 navigateTo('/login');
 </script>

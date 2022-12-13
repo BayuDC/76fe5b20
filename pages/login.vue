@@ -12,7 +12,7 @@ interface LoginForm extends EventTarget {
 }
 async function handleSubmit(e: Event) {
     const { error } = await useApi('/auth/login', {
-        method: 'post',
+        method: 'POST',
         body: {
             username: (e.target as LoginForm).username.value,
             password: (e.target as LoginForm).password.value,
@@ -20,8 +20,9 @@ async function handleSubmit(e: Event) {
     });
 
     if (!error.value) {
-        await refresh();
-        navigateTo('/', { replace: true });
+        if (!(await refresh())) {
+            navigateTo('/', { replace: true });
+        }
     }
 }
 </script>
