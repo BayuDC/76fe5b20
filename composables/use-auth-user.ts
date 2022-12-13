@@ -1,6 +1,7 @@
-interface AuthUser {
+export interface AuthUser {
     username: string;
     fullname: string;
+    limited: boolean;
     secure: boolean;
     role: string;
 }

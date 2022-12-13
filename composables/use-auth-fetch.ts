@@ -1,7 +1,7 @@
 export default function useAuthFetch() {
     const user = useAuthUser();
     const loading = useState('auth-loading', () => false);
-    const { data, refresh } = useApi('/auth', {
+    const { data, refresh, error } = useApi('/auth', {
         immediate: false,
         pick: ['user'],
         onRequest() {
@@ -17,6 +17,11 @@ export default function useAuthFetch() {
         async refresh() {
             await refresh();
             user.value = data.value?.user;
+
+            if (error.value?.status == 425) {
+                user.value = { limited: true };
+                navigateTo('/password/update');
+            }
         },
         loading,
     };
