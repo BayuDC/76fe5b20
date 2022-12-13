@@ -4,6 +4,7 @@ const message = useMessage();
 const loading = useLoading();
 const password1 = ref('');
 const password2 = ref('');
+const notif = ref('');
 
 async function handleSubmit() {
     if (password1.value.length < 6) {
@@ -13,7 +14,7 @@ async function handleSubmit() {
         return (message.value = 'The password confirmation does not match');
     }
 
-    const { data, error } = await useApi('/profile/password', {
+    const { data } = await useApi('/profile/password', {
         method: 'PATCH',
         body: {
             password: password1.value,
@@ -21,8 +22,11 @@ async function handleSubmit() {
         },
     });
 
-    // ! temp
-    await useAuthFetch().refresh();
+    notif.value = data.value.message;
+}
+function handleOk() {
+    useAuthUser().value = undefined;
+    navigateTo('/login');
 }
 function protectPage() {
     return useAuthUser().value?.limited;
@@ -31,7 +35,7 @@ function protectPage() {
 
 <template>
     <Guard :custom="protectPage">
-        <div class="hero min-h-screen">
+        <div class="hero min-h-screen" v-if="!notif">
             <div class="hero-content flex-col lg:flex-row-reverse w-full max-w-sm">
                 <div class="text-center lg:text-left w-full max-w-80">
                     <h1 class="text-5xl font-bold">Please Update Your Password</h1>
@@ -58,5 +62,11 @@ function protectPage() {
                 </div>
             </div>
         </div>
+        <Modal v-else>
+            <h3 class="font-bold text-lg">{{ notif }}</h3>
+            <div class="modal-action">
+                <button @click="handleOk" class="btn" autofocus>OK</button>
+            </div>
+        </Modal>
     </Guard>
 </template>

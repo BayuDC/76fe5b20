@@ -20,7 +20,7 @@ async function handleSubmit(e: Event) {
     });
 
     if (!error.value) {
-        if (!(await refresh())) {
+        if (await refresh()) {
             navigateTo('/', { replace: true });
         }
     }
