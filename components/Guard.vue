@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-const render = ref(false);
 const user = useAuthUser();
+const render = ref(false);
 const props = defineProps({
     inverse: {
         default: false,
@@ -12,18 +12,19 @@ const props = defineProps({
 });
 
 onMounted(() => {
-    if (!user.value && !props.inverse) return navigateTo('/login');
-    if (user.value && props.inverse) return navigateTo('/');
-    if (props.custom && !props.custom()) {
-        return showError({ statusCode: 403, message: 'Forbidden' });
+    if (!user.value && !props.inverse) {
+        navigateTo('/login');
+    } else if (user.value && props.inverse) {
+        navigateTo('/');
+    } else if (props.custom && !props.custom()) {
+        showError({ statusCode: 403, message: 'Forbidden' });
+    } else {
+        render.value = true;
     }
-
-    render.value = true;
 });
 </script>
 
 <template>
     <slot v-if="render" />
+    <!-- TODO Loading -->
 </template>
-
-<style scoped></style>

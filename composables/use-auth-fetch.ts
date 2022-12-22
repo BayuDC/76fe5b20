@@ -1,16 +1,10 @@
+import { AuthUser } from './use-auth-user';
+
 export default function useAuthFetch() {
     const user = useAuthUser();
-    const loading = useState('auth-loading', () => false);
-    const { data, refresh, error } = useApi('/auth', {
+    const { data, refresh, error } = useFetch<{ user: AuthUser }>('/api/auth', {
+        pick: ['user' as never],
         immediate: false,
-        pick: ['user'],
-        onRequest() {
-            loading.value = true;
-        },
-        onResponse() {
-            loading.value = false;
-        },
-        onResponseError() {},
     });
 
     return {
@@ -26,6 +20,5 @@ export default function useAuthFetch() {
 
             return true;
         },
-        loading,
     };
 }

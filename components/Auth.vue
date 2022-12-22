@@ -1,8 +1,12 @@
 <script lang="ts" setup>
-const { loading, refresh } = useAuthFetch();
-onMounted(async () => await refresh());
+const { refresh } = useAuthFetch();
+const render = ref(false);
+onMounted(async () => {
+    await refresh();
+    render.value = true;
+});
 </script>
 <template>
-    <slot v-if="!loading" />
+    <slot v-if="render" />
     <!-- TODO Loading -->
 </template>
