@@ -2,12 +2,19 @@ import { UseFetchOptions } from 'nuxt/dist/app/composables';
 import { AsyncData } from 'nuxt/dist/app/composables/asyncData';
 import type { FetchError } from 'ofetch';
 
-export default function useApi(
-    path: string,
-    opts?: UseFetchOptions<any> | undefined
-): AsyncData<any, FetchError<any> | null> {
+interface UseApiOptions extends UseFetchOptions<any> {
+    toast?: boolean;
+}
+
+const defaultOpts: UseApiOptions = {
+    toast: true,
+};
+
+export default function useApi(path: string, opts?: UseApiOptions | undefined): AsyncData<any, FetchError<any> | null> {
     const loading = useLoading();
     const message = useMessage();
+
+    opts = { ...defaultOpts, ...opts };
 
     return useFetch('/api' + path, {
         onRequest() {
@@ -18,6 +25,7 @@ export default function useApi(
             loading.value = false;
         },
         onResponseError({ response }) {
+            if (!opts.toast) return;
             message.value = response._data?.message || 'Something went wrong';
         },
         ...opts,
