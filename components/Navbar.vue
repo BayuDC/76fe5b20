@@ -10,7 +10,10 @@ const user = useAuthUser();
         <div class="flex-none">
             <div v-if="user" class="dropdown dropdown-end">
                 <label tabindex="0" class="btn btn-ghost btn-circle avatar flex">
-                    <div class="w-10 rounded-full bg-primary text-white text-2xl font-bold items-center leading-normal">
+                    <div
+                        class="w-10 rounded-full bg-primary text-2xl items-center leading-normal"
+                        style="color: #4d002b"
+                    >
                         {{ user.fullname?.charAt(0) || user.username?.charAt(0) }}
                     </div>
                 </label>
