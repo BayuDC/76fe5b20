@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 definePageMeta({ layout: 'clear' });
+const { user } = useAuth();
 const message = useMessage();
 const loading = useLoading();
 const password1 = ref('');
@@ -25,11 +26,11 @@ async function handleSubmit() {
     notif.value = data.value.message;
 }
 function handleOk() {
-    useAuthUser().value = undefined;
+    user.value = undefined;
     navigateTo('/login');
 }
 function protectPage() {
-    return useAuthUser().value?.limited;
+    return user.value?.limited;
 }
 </script>
 

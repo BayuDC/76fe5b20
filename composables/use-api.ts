@@ -25,7 +25,7 @@ export default function useApi(path: string, opts?: UseApiOptions | undefined): 
             loading.value = false;
         },
         onResponseError({ response }) {
-            if (!opts.toast) return;
+            if (!opts?.toast) return;
             message.value = response._data?.message || 'Something went wrong';
         },
         ...opts,

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const id = useRoute().params.id;
-const role = useAuthUser().value?.role;
+const role = useAuth().user.value?.role;
 const { data } = await useApi(`/courses/${id}`);
 const check = await useApi(`/courses/${id}/check`, {
     method: 'HEAD',

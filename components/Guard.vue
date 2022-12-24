@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const user = useAuthUser();
+const { user } = useAuth();
 const render = ref(false);
 const props = defineProps({
     inverse: {

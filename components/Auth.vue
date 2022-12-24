@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-const { refresh } = useAuthFetch();
 const render = ref(false);
+
 onMounted(async () => {
-    await refresh();
+    await useAuth().fetch();
     render.value = true;
 });
 </script>
