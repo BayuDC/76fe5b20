@@ -3,9 +3,7 @@ const { data } = await useApi('/courses');
 </script>
 
 <template>
-    <Guard>
-        <div class="grid grid-cols-3 gap-4">
-            <CourseCard v-for="course in data.courses" :key="course.id" :course="course" />
-        </div>
-    </Guard>
+    <div class="grid grid-cols-3 gap-4">
+        <CourseCard v-for="course in data.courses" :key="course.id" :course="course" />
+    </div>
 </template>

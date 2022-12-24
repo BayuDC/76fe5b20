@@ -4,7 +4,4 @@ useAuth().user.value = undefined;
 navigateTo('/login');
 </script>
 
-<template>
-    <Guard />
-    <!-- TODO Loading -->
-</template>
+<template></template>

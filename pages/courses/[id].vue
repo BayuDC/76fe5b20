@@ -9,7 +9,7 @@ const check = await useApi(`/courses/${id}/check`, {
 </script>
 
 <template>
-    <Guard>
+    <div>
         <Breadcrumb>
             <li>{{ data.course.name }}</li>
         </Breadcrumb>
@@ -20,5 +20,5 @@ const check = await useApi(`/courses/${id}/check`, {
             <CourseDetailTeacher v-else-if="role == 'teacher'" />
             <Course403 v-else />
         </div>
-    </Guard>
+    </div>
 </template>

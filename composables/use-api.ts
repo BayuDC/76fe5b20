@@ -11,12 +11,14 @@ const defaultOpts: UseApiOptions = {
 };
 
 export default function useApi(path: string, opts?: UseApiOptions | undefined): AsyncData<any, FetchError<any> | null> {
+    const config = useAppConfig();
     const loading = useLoading();
     const message = useMessage();
 
     opts = { ...defaultOpts, ...opts };
 
     return useFetch('/api' + path, {
+        baseURL: config.baseUrl,
         onRequest() {
             loading.value = true;
             message.value = undefined;

@@ -1,7 +1,5 @@
 <script lang="ts" setup>
-definePageMeta({
-    layout: 'clear',
-});
+definePageMeta({ layout: 'clear' });
 </script>
 <template>
     <Guard inverse>
