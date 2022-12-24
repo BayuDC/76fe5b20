@@ -1,5 +1,7 @@
 <script lang="ts" setup>
 const { data } = await useApi('/courses');
+setMenuNav([]);
+setMenuItem([]);
 </script>
 
 <template>
