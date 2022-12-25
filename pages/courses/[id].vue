@@ -8,7 +8,7 @@ const check = await useApi(`/courses/${id}/check`, {
 });
 
 setMenuNav([{ label: data.value.course.name }]);
-setMenuItem([{ label: 'New Assignment', href: `/assignment/new?course=${id}` }]);
+setMenuItem([{ label: 'New Assignment', href: `/assignments/new?course=${id}` }]);
 </script>
 
 <template>
