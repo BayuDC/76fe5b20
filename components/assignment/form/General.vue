@@ -21,7 +21,7 @@ function handleSubmit(e: Event) {
     <form @submit.prevent="handleSubmit" class="w-full max-w-xl">
         <div class="form-control w-full mb-4">
             <label class="label" for="name">
-                <div class="label-text">Name<span class="text-error">*</span></div>
+                <div class="label-text">Name <span class="text-error">*</span></div>
             </label>
             <input type="text" class="input input-bordered w-full" name="name" id="name" required />
         </div>
@@ -40,7 +40,7 @@ function handleSubmit(e: Event) {
                 <option value="files">Files</option>
             </select>
         </div>
-        <div class="flex items-center justify-end gap-4 max-w-xl">
+        <div class="flex items-center justify-end gap-4 w-full">
             <button class="btn" @click="useRouter().back()" type="button">Back to Course</button>
             <button class="btn btn-primary" :class="{ loading }" type="submit">Create</button>
         </div>
