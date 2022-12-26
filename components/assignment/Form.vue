@@ -18,20 +18,20 @@ function handleSubmit(e: Event) {
 </script>
 
 <template>
-    <form @submit.prevent="handleSubmit">
-        <div class="form-control w-full max-w-xl mb-4">
+    <form @submit.prevent="handleSubmit" class="w-full max-w-xl">
+        <div class="form-control w-full mb-4">
             <label class="label" for="name">
                 <div class="label-text">Name<span class="text-error">*</span></div>
             </label>
             <input type="text" class="input input-bordered w-full" name="name" id="name" required />
         </div>
-        <div class="form-control w-full max-w-xl mb-4">
+        <div class="form-control w-full mb-4">
             <label class="label" for="description">
                 <div class="label-text">Description <span class="text-error">*</span></div>
             </label>
             <textarea class="textarea textarea-bordered h-24" required name="description" id="description"></textarea>
         </div>
-        <div class="form-control w-full max-w-xl mb-8">
+        <div class="form-control w-full mb-8">
             <label class="label" for="type">
                 <div class="label-text">Type <span class="text-error">*</span></div>
             </label>
