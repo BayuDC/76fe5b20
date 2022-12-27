@@ -1,19 +1,19 @@
 <script lang="ts" setup>
-const props = defineProps({
-    courseId: String,
-});
+const props = defineProps({ courseId: String });
+const emit = defineEmits(['finish']);
 const loading = useLoading();
 
-interface AssignmentForm extends EventTarget {
-    name: { value: string };
-    description: { value: string };
-    type: { value: string };
-}
+async function handleSubmit(e: Event) {
+    const { error, data } = await useApi(`/courses/${props.courseId}/assignments`, {
+        method: 'POST',
+        body: {
+            name: (e.target as any).name.value,
+            description: (e.target as any).description.value,
+            type: (e.target as any).type.value,
+        },
+    });
 
-function handleSubmit(e: Event) {
-    console.log((e.target as AssignmentForm).name.value);
-    console.log((e.target as AssignmentForm).description.value);
-    console.log((e.target as AssignmentForm).type.value);
+    if (!error.value) emit('finish', data.value?.assignment.id);
 }
 </script>
 
