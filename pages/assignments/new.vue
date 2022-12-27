@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 const role = useAuth().user.value?.role;
 const courseId = useRoute().query.course as string;
+const assignmentId = ref('');
 
 if (role != 'teacher') showError({ statusCode: 403, statusMessage: 'Forbidden' });
 
@@ -16,6 +17,12 @@ const Forms = [
     resolveComponent('AssignmentFormSchedule'),
     resolveComponent('AssignmentFormAttachment'),
 ];
+
+function handleFinish(e?: string) {
+    if (e) assignmentId.value = e;
+    if (position.value < 2) position.value++;
+    else navigateTo(`/courses/${courseId}`);
+}
 </script>
 
 <template>
@@ -23,7 +30,7 @@ const Forms = [
         <Course403 v-if="check.error.value" />
         <div v-else class="lg:flex lg:gap-8 lg:items-start">
             <AssignmentSteps :position="position" />
-            <component :is="Forms[position]" :courseId="courseId" @done="position++" />
+            <component :is="Forms[position]" :courseId="courseId" :assignmentId="assignmentId" @finish="handleFinish" />
         </div>
     </div>
 </template>
